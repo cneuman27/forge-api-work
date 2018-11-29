@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup Label="Globals">
+    <TypeScriptToolsVersion>2.7</TypeScriptToolsVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="src\app\forge-viewer\forge-viewer.component.ts" />
+    <None Remove="src\app\services\forge-api.service.ts" />
+    <None Remove="src\app\types\CAuthenticationToken.ts" />
+    <None Remove="src\app\_main\CConverters.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="src\app\forge-viewer\forge-viewer.component.ts" />
+    <TypeScriptCompile Include="src\app\services\forge-api.service.ts" />
+    <TypeScriptCompile Include="src\app\types\CAuthenticationToken.ts" />
+    <TypeScriptCompile Include="src\app\_main\CConverters.ts" />
+  </ItemGroup>
+</Project>

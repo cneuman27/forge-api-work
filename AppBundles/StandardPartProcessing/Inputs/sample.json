@@ -1,0 +1,21 @@
+{
+    "Reference": "SQ18-119490-01 - END PANEL [387-00214-46932]",
+    "PartNumber": "087-00216-58032",
+    "Description": "PNL E2F OUT 20G",
+    "IPTFile": "086-00101-064.ipt",
+    "IDWFile": "086-00101-064.idw",
+    "XLSFile": "Calc_00001_011.xls",
+    "Parameters": {
+        "Seg_H": "42",
+        "Seg_W": "81",
+        "Pnl_Otr_Ga": "20",
+        "Pnl_Otr_Mtl": "STL GALV",
+        "Pnl_Lnr_Ga": "20",
+        "Pnl_Lnr_Mtl": "STL GALV",
+        "Pnl_O_Dim": "26.125",
+        "Pnl_O_Len": "58.125",
+        "Pnl_O_Dim_Loc": "5.438",
+        "Pnl_O_Len_Loc": "8.938",
+        "Unit_Style": "STD"
+    }
+}

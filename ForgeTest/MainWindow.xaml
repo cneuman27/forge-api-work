@@ -1,0 +1,1066 @@
+﻿<MOMShared:CMOMForm x:Class="ForgeTest.MainWindow"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:local="clr-namespace:ForgeTest"
+                    xmlns:local_Converters="clr-namespace:ForgeTest.Converters"
+                    xmlns:local_ViewerUI="clr-namespace:ForgeTest.ViewerUI"
+                    xmlns:igWindows="http://infragistics.com/Windows"
+                    xmlns:igDP="http://infragistics.com/DataPresenter"
+                    xmlns:igEditors="http://infragistics.com/Editors"
+                    xmlns:MOMControls="clr-namespace:MOMControls;assembly=MOMControls"
+                    xmlns:MOMShared="clr-namespace:MOMShared;assembly=MOMShared"
+                    mc:Ignorable="d"
+                    Title="Forge Test" 
+                    WindowStartupLocation="CenterScreen"
+                    Height="570" 
+                    Width="700"
+                    MinHeight="570"
+                    MinWidth="384"
+                    Loaded="CMOMForm_Loaded">
+    <MOMShared:CMOMForm.Resources>
+        <local_Converters:Converter_DateTimeToTimeString x:Key="Converter_DateTimeToTimeString" />
+    </MOMShared:CMOMForm.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <igWindows:XamTabControl Name="tabControlMain"
+                                 Grid.Row="0"
+                                 Margin="5">
+            <igWindows:XamTabControl.Resources>
+                <DataTemplate x:Key="Template_Header">
+                    <TextBlock Name="txtHeader"
+                               Text="{Binding}" />
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type igWindows:TabItemEx}}, Path=IsSelected}" 
+                                     Value="True">
+                            <Setter TargetName="txtHeader" 
+                                    Property="FontWeight" 
+                                    Value="Bold" />
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </igWindows:XamTabControl.Resources>
+            <igWindows:TabItemEx Header="Bucket Management"
+                                 HeaderTemplate="{StaticResource Template_Header}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <MOMControls:CMOMDataGrid Name="gridBucketManagement"
+                                              Grid.Column="0"
+                                              Margin="5"
+                                              GroupByAreaLocation="None"
+                                              SelectedItemsChanged="gridBucketManagement_SelectedItemsChanged">
+                        <MOMControls:CMOMDataGrid.Resources>
+                            <Style TargetType="{x:Type igDP:DataRecordPresenter}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="FontWeight" Value="Bold" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                            <Style TargetType="{x:Type igDP:HeaderLabelArea}">
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Style>
+                            <Style x:Key="Style_CVP_Base"
+                                   TargetType="{x:Type igDP:CellValuePresenter}">
+                                <Setter Property="BorderBrush" Value="Black" />
+                                <Setter Property="BorderThickness" Value="0,0,1,1" />
+                                <Setter Property="Padding" Value="3,3,3,3" />
+                            </Style>
+                        </MOMControls:CMOMDataGrid.Resources>
+                        <MOMControls:CMOMDataGrid.FieldLayouts>
+                            <igDP:FieldLayout>
+                                <igDP:FieldLayout.Settings>
+                                    <igDP:FieldLayoutSettings 
+                                        AutoGenerateFields="False" 
+                                        AllowAddNew="False"
+                                        AllowDelete="False" 
+                                        SelectionTypeRecord="Single"
+                                        AutoFitMode="ExtendLastField" />
+                                </igDP:FieldLayout.Settings>
+                                <igDP:FieldLayout.Fields>
+                                    <igDP:Field Name="BucketKey"
+                                                Label="Bucket">
+                                        <igDP:Field.Settings>
+                                            <igDP:FieldSettings 
+                                                CellClickAction="SelectRecord" 
+                                                AllowEdit="False" 
+                                                LabelClickAction="Nothing"
+                                                Width="Auto"                                          
+                                                CellValuePresenterStyle="{StaticResource Style_CVP_Base}"/>
+                                        </igDP:Field.Settings>
+                                    </igDP:Field>
+                                    <igDP:Field Name="CreateDate"
+                                                Label="Created" >
+                                        <igDP:Field.Settings>
+                                            <igDP:FieldSettings 
+                                                LabelClickAction="Nothing"
+                                                CellClickAction="SelectRecord" 
+                                                AllowEdit="False" 
+                                                Width="Auto"
+                                                CellValuePresenterStyle="{StaticResource Style_CVP_Base}"/>
+                                        </igDP:Field.Settings>
+                                    </igDP:Field>
+                                    <igDP:Field Name="RetentionPolicy"
+                                                Label="Retention Policy" >
+                                        <igDP:Field.Settings>
+                                            <igDP:FieldSettings 
+                                                LabelClickAction="Nothing"
+                                                CellClickAction="SelectRecord" 
+                                                AllowEdit="False" 
+                                                Width="Auto"
+                                                CellValuePresenterStyle="{StaticResource Style_CVP_Base}"/>
+                                        </igDP:Field.Settings>
+                                    </igDP:Field>
+                                </igDP:FieldLayout.Fields>
+                            </igDP:FieldLayout>
+                        </MOMControls:CMOMDataGrid.FieldLayouts>
+                    </MOMControls:CMOMDataGrid>
+                    <Rectangle Grid.Column="1"
+                               Margin="0,5,0,5"
+                               Fill="Black"
+                               Width="2" />
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <MOMControls:CMOMButton Name="btnRefreshBucketList"
+                                                Content="Refresh"
+                                                Grid.Row="0"
+                                                Margin="5"
+                                                Width="75"
+                                                FontWeight="Bold"
+                                                IsEnabled="False"
+                                                Click="btnRefreshBucketList_Click" />
+                        <Rectangle Grid.Row="1"
+                                   Margin="5,0,5,0"
+                                   Height="2"
+                                   Fill="Black" />
+                        <MOMControls:CMOMButton Name="btnNewBucket"
+                                                Content="New"
+                                                Grid.Row="2"
+                                                Margin="5"
+                                                Width="75"
+                                                FontWeight="Bold"
+                                                IsEnabled="False"
+                                                Click="btnNewBucket_Click" />
+                        <MOMControls:CMOMButton Name="btnDeleteBucket"
+                                                Content="Delete"
+                                                Grid.Row="3"
+                                                Margin="5,0,5,5"
+                                                Width="75"
+                                                FontWeight="Bold"
+                                                IsEnabled="False"
+                                                Click="btnDeleteBucket_Click" />
+                    </Grid>
+
+                </Grid>
+            </igWindows:TabItemEx>
+            <igWindows:TabItemEx Header="Uploader"
+                                 HeaderTemplate="{StaticResource Template_Header}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    
+                    <MOMControls:CMOMLabel Content="Part Number:"
+                                           Grid.Row="0"
+                                           FontWeight="Bold"
+                                           Margin="5"
+                                           VerticalAlignment="Center"
+                                           HorizontalContentAlignment="Right" />
+                    <MOMControls:CMOMTextBox Name="txtUploadPartNumber"
+                                             Grid.Row="0"
+                                             Grid.Column="1"
+                                             Margin="0,5,5,5"
+                                             VerticalContentAlignment="Center"
+                                             HorizontalAlignment="Left"
+                                             Width="150"
+                                             IsEnabled="False"
+                                             TextChanged="txtUploadPartNumber_TextChanged" />
+
+                    <Rectangle Grid.Row="1"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="3"
+                               Margin="5,0,5,0"
+                               Height="2"
+                               Fill="Black" />
+
+
+                    <MOMControls:CMOMLabel Content="Bucket:"
+                                           Grid.Row="2"
+                                           FontWeight="Bold"
+                                           Margin="5"
+                                           VerticalAlignment="Center"
+                                           HorizontalContentAlignment="Right" />
+                    <Grid Grid.Row="2"
+                          Grid.Column="1"
+                          Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <MOMControls:CMOMComboBoxIG Name="cmbBuckets"
+                                                    Grid.Column="0"
+                                                    Margin="0,5,5,5"
+                                                    Width="200"
+                                                    HorizontalAlignment="Left"
+                                                    VerticalContentAlignment="Center"
+                                                    IsEnabled="False"
+                                                    DisplayMemberPath="BucketKey"
+                                                    SelectedItemChanged="cmbBuckets_SelectedItemChanged" />
+                        <MOMControls:CMOMButton Name="btnRefreshUploadBuckets"
+                                                Content="Refresh"
+                                                Grid.Column="1"
+                                                Margin="0,5,5,5"
+                                                Width="75"
+                                                FontWeight="Bold"
+                                                IsEnabled="False"
+                                                Click="btnRefreshUploadBuckets_Click" />
+                    </Grid>
+
+                    <Rectangle Grid.Row="3"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="3"
+                               Margin="5,0,5,0"
+                               Height="2"
+                               Fill="Black" />
+
+                    <MOMControls:CMOMLabel Content="IPT File:"
+                                           FontWeight="Bold"
+                                           Grid.Row="4"
+                                           Margin="5"
+                                           VerticalAlignment="Center"
+                                           HorizontalContentAlignment="Right" />
+                    <MOMControls:CMOMTextBox Name="txtIPTFile"
+                                             Text="N/A"
+                                             Grid.Row="4"
+                                             Grid.Column="1"
+                                             Margin="0,5,5,5"
+                                             FontWeight="Bold"
+                                             VerticalContentAlignment="Center"
+                                             IsReadOnly="True"
+                                             IsEnabled="False"
+                                             EnablePathTrimming="True" />
+                    <MOMControls:CMOMButton Name="btnSelectIPT"
+                                            Content="Select"
+                                            Grid.Row="4"
+                                            Grid.Column="2"
+                                            Margin="0,5,5,5"
+                                            FontWeight="Bold"
+                                            Width="55"
+                                            IsEnabled="False"
+                                            Click="btnSelectIPT_Click" />
+
+                    <MOMControls:CMOMLabel Content="XLS File:"
+                                           FontWeight="Bold"
+                                           Grid.Row="5"
+                                           Margin="5,0,5,5"
+                                           VerticalAlignment="Center"
+                                           HorizontalContentAlignment="Right" />
+                    <MOMControls:CMOMTextBox Name="txtXLSFile"
+                                             Text="N/A"
+                                             Grid.Row="5"
+                                             Grid.Column="1"
+                                             Margin="0,0,5,5"
+                                             FontWeight="Bold"
+                                             VerticalContentAlignment="Center"
+                                             IsReadOnly="True"
+                                             IsEnabled="False"
+                                             EnablePathTrimming="True" />
+                    <MOMControls:CMOMButton Name="btnSelectXLS"
+                                            Content="Select"
+                                            Grid.Row="5"
+                                            Grid.Column="2"
+                                            Margin="0,0,5,5"
+                                            FontWeight="Bold"
+                                            Width="55"
+                                            IsEnabled="False"
+                                            Click="btnSelectXLS_Click" />
+
+                    <MOMControls:CMOMLabel Content="IDW File:"
+                                           FontWeight="Bold"
+                                           Grid.Row="6"
+                                           Margin="5,0,5,5"
+                                           VerticalAlignment="Center"
+                                           HorizontalContentAlignment="Right" />
+                    <MOMControls:CMOMTextBox Name="txtIDWFile"
+                                             Text="N/A"
+                                             Grid.Row="6"
+                                             Grid.Column="1"
+                                             Margin="0,0,5,5"
+                                             FontWeight="Bold"
+                                             VerticalContentAlignment="Center"
+                                             IsReadOnly="True"
+                                             IsEnabled="False"
+                                             EnablePathTrimming="True" />
+                    <MOMControls:CMOMButton Name="btnSelectIDW"
+                                            Content="Select"
+                                            Grid.Row="6"
+                                            Grid.Column="2"
+                                            Margin="0,0,5,5"
+                                            FontWeight="Bold"
+                                            Width="55"
+                                            IsEnabled="False"
+                                            Click="btnSelectIDW_Click" />
+
+                    <Rectangle Grid.Row="7"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="3"
+                               Margin="5,0,5,0"
+                               Height="2"
+                               Fill="Black" />
+
+                    <MOMControls:CMOMButton Name="btnUploadToBucket"
+                                            Content="Upload"
+                                            Grid.Row="8"
+                                            Grid.Column="0"
+                                            Grid.ColumnSpan="3"
+                                            Margin="5"
+                                            FontWeight="Bold"
+                                            IsEnabled="False"
+                                            Click="btnUploadToBucket_Click" />
+
+                    <igWindows:XamTabControl Grid.Row="9"
+                                             Grid.Column="0"
+                                             Grid.ColumnSpan="3"
+                                             Margin="5">
+                        <igWindows:TabItemEx Header="IPT Results"
+                                             HeaderTemplate="{StaticResource Template_Header}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <MOMControls:CMOMLabel Content="Bucket Key:"
+                                                       Grid.Row="0"
+                                                       Grid.Column="0"
+                                                       Margin="5"
+                                                       FontWeight="Bold"
+                                                       VerticalContentAlignment="Center"
+                                                       HorizontalAlignment="Right" />
+                                <MOMControls:CMOMTextBox Name="txtUploadResultsIPT_BucketKey"
+                                                         Text="N/A"
+                                                         Grid.Row="0"
+                                                         Grid.Column="1"
+                                                         Margin="0,5,5,5"
+                                                         FontWeight="Bold"
+                                                         FontFamily="Courier New"
+                                                         VerticalContentAlignment="Center"
+                                                         IsReadOnly="True"
+                                                         IsEnabled="False" />
+
+                                <MOMControls:CMOMLabel Content="Object ID:"
+                                                       Grid.Row="1"
+                                                       Grid.Column="0"
+                                                       Margin="5,0,5,5"
+                                                       FontWeight="Bold"
+                                                       VerticalContentAlignment="Center"
+                                                       HorizontalAlignment="Right" />
+                                <MOMControls:CMOMTextBox Name="txtUploadResultsIPT_ObjectID"
+                                                         Text="N/A"
+                                                         Grid.Row="1"
+                                                         Grid.Column="1"
+                                                         Margin="0,0,5,5"
+                                                         FontWeight="Bold"
+                                                         FontFamily="Courier New"
+                                                         VerticalContentAlignment="Center"
+                                                         IsReadOnly="True"
+                                                         IsEnabled="False" />
+
+                                <MOMControls:CMOMLabel Content="Object Key:"
+                                                       Grid.Row="2"
+                                                       Grid.Column="0"
+                                                       Margin="5,0,5,5"
+                                                       FontWeight="Bold"
+                                                       VerticalContentAlignment="Center"
+                                                       HorizontalAlignment="Right" />
+                                <MOMControls:CMOMTextBox Name="txtUploadResultsIPT_ObjectKey"
+                                                         Text="N/A"
+                                                         Grid.Row="2"
+                                                         Grid.Column="1"
+                                                         Margin="0,0,5,5"
+                                                         FontWeight="Bold"
+                                                         FontFamily="Courier New"
+                                                         VerticalContentAlignment="Center"
+                                                         IsReadOnly="True"
+                                                         IsEnabled="False" />
+
+                                <MOMControls:CMOMLabel Content="SHA1:"
+                                                       Grid.Row="3"
+                                                       Grid.Column="0"
+                                                       Margin="5,0,5,5"
+                                                       FontWeight="Bold"
+                                                       VerticalContentAlignment="Center"
+                                                       HorizontalAlignment="Right" />
+                                <MOMControls:CMOMTextBox Name="txtUploadResultsIPT_SHA1"
+                                                         Text="N/A"
+                                                         Grid.Row="3"
+                                                         Grid.Column="1"
+                                                         Margin="0,0,5,5"
+                                                         FontWeight="Bold"
+                                                         FontFamily="Courier New"
+                                                         VerticalContentAlignment="Center"
+                                                         IsReadOnly="True"
+                                                         IsEnabled="False" />
+
+                                <MOMControls:CMOMLabel Content="Object Size:"
+                                                       Grid.Row="4"
+                                                       Grid.Column="0"
+                                                       Margin="5,0,5,5"
+                                                       FontWeight="Bold"
+                                                       VerticalContentAlignment="Center"
+                                                       HorizontalAlignment="Right" />
+                                <MOMControls:CMOMTextBox Name="txtUploadResultsIPT_ObjectSize"
+                                                         Text="N/A"
+                                                         Grid.Row="4"
+                                                         Grid.Column="1"
+                                                         Margin="0,0,5,5"
+                                                         FontWeight="Bold"
+                                                         FontFamily="Courier New"
+                                                         VerticalContentAlignment="Center"
+                                                         IsReadOnly="True"
+                                                         IsEnabled="False" />
+
+                                <MOMControls:CMOMLabel Content="Content Type:"
+                                                       Grid.Row="5"
+                                                       Grid.Column="0"
+                                                       Margin="5,0,5,5"
+                                                       FontWeight="Bold"
+                                                       VerticalContentAlignment="Center"
+                                                       HorizontalAlignment="Right" />
+                                <MOMControls:CMOMTextBox Name="txtUploadResultsIPT_ContentType"
+                                                         Text="N/A"
+                                                         Grid.Row="5"
+                                                         Grid.Column="1"
+                                                         Margin="0,0,5,5"
+                                                         FontWeight="Bold"
+                                                         FontFamily="Courier New"
+                                                         VerticalContentAlignment="Center"
+                                                         IsReadOnly="True"
+                                                         IsEnabled="False" />
+
+                                <MOMControls:CMOMLabel Content="Download URI:"
+                                                       Grid.Row="6"
+                                                       Grid.Column="0"
+                                                       Margin="5,0,5,5"
+                                                       FontWeight="Bold"
+                                                       VerticalContentAlignment="Center"
+                                                       HorizontalAlignment="Right" />
+                                <Grid Grid.Row="6"
+                                      Grid.Column="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <MOMControls:CMOMTextBox Name="txtUploadResultsIPT_DownloadURI"
+                                                             Text="N/A"
+                                                             Margin="0,0,5,5"
+                                                             FontWeight="Bold"
+                                                             FontFamily="Courier New"
+                                                             VerticalContentAlignment="Center"
+                                                             IsReadOnly="True"
+                                                             IsEnabled="False" />
+                                    <MOMControls:CMOMButton Name="btnUploadResultsIPT_DownloadFile"
+                                                            Content="Download"
+                                                            Grid.Column="1"
+                                                            Margin="0,0,5,5"
+                                                            FontWeight="Bold"
+                                                            Width="75"
+                                                            IsEnabled="False"
+                                                            Click="btnUploadResultsIPT_DownloadFile_Click" />
+                                </Grid>
+                            </Grid>
+                        </igWindows:TabItemEx>
+                        <igWindows:TabItemEx Header="IDW Results"
+                                             HeaderTemplate="{StaticResource Template_Header}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <MOMControls:CMOMLabel Content="Bucket Key:"
+                                                       Grid.Row="0"
+                                                       Grid.Column="0"
+                                                       Margin="5"
+                                                       FontWeight="Bold"
+                                                       VerticalContentAlignment="Center"
+                                                       HorizontalAlignment="Right" />
+                                <MOMControls:CMOMTextBox Name="txtUploadResultsIDW_BucketKey"
+                                                         Text="N/A"
+                                                         Grid.Row="0"
+                                                         Grid.Column="1"
+                                                         Margin="0,5,5,5"
+                                                         FontWeight="Bold"
+                                                         FontFamily="Courier New"
+                                                         VerticalContentAlignment="Center"
+                                                         IsReadOnly="True"
+                                                         IsEnabled="False" />
+
+                                <MOMControls:CMOMLabel Content="Object ID:"
+                                                       Grid.Row="1"
+                                                       Grid.Column="0"
+                                                       Margin="5,0,5,5"
+                                                       FontWeight="Bold"
+                                                       VerticalContentAlignment="Center"
+                                                       HorizontalAlignment="Right" />
+                                <MOMControls:CMOMTextBox Name="txtUploadResultsIDW_ObjectID"
+                                                         Text="N/A"
+                                                         Grid.Row="1"
+                                                         Grid.Column="1"
+                                                         Margin="0,0,5,5"
+                                                         FontWeight="Bold"
+                                                         FontFamily="Courier New"
+                                                         VerticalContentAlignment="Center"
+                                                         IsReadOnly="True"
+                                                         IsEnabled="False" />
+
+                                <MOMControls:CMOMLabel Content="Object Key:"
+                                                       Grid.Row="2"
+                                                       Grid.Column="0"
+                                                       Margin="5,0,5,5"
+                                                       FontWeight="Bold"
+                                                       VerticalContentAlignment="Center"
+                                                       HorizontalAlignment="Right" />
+                                <MOMControls:CMOMTextBox Name="txtUploadResultsIDW_ObjectKey"
+                                                         Text="N/A"
+                                                         Grid.Row="2"
+                                                         Grid.Column="1"
+                                                         Margin="0,0,5,5"
+                                                         FontWeight="Bold"
+                                                         FontFamily="Courier New"
+                                                         VerticalContentAlignment="Center"
+                                                         IsReadOnly="True"
+                                                         IsEnabled="False" />
+
+                                <MOMControls:CMOMLabel Content="SHA1:"
+                                                       Grid.Row="3"
+                                                       Grid.Column="0"
+                                                       Margin="5,0,5,5"
+                                                       FontWeight="Bold"
+                                                       VerticalContentAlignment="Center"
+                                                       HorizontalAlignment="Right" />
+                                <MOMControls:CMOMTextBox Name="txtUploadResultsIDW_SHA1"
+                                                         Text="N/A"
+                                                         Grid.Row="3"
+                                                         Grid.Column="1"
+                                                         Margin="0,0,5,5"
+                                                         FontWeight="Bold"
+                                                         FontFamily="Courier New"
+                                                         VerticalContentAlignment="Center"
+                                                         IsReadOnly="True"
+                                                         IsEnabled="False" />
+
+                                <MOMControls:CMOMLabel Content="Object Size:"
+                                                       Grid.Row="4"
+                                                       Grid.Column="0"
+                                                       Margin="5,0,5,5"
+                                                       FontWeight="Bold"
+                                                       VerticalContentAlignment="Center"
+                                                       HorizontalAlignment="Right" />
+                                <MOMControls:CMOMTextBox Name="txtUploadResultsIDW_ObjectSize"
+                                                         Text="N/A"
+                                                         Grid.Row="4"
+                                                         Grid.Column="1"
+                                                         Margin="0,0,5,5"
+                                                         FontWeight="Bold"
+                                                         FontFamily="Courier New"
+                                                         VerticalContentAlignment="Center"
+                                                         IsReadOnly="True"
+                                                         IsEnabled="False" />
+
+                                <MOMControls:CMOMLabel Content="Content Type:"
+                                                       Grid.Row="5"
+                                                       Grid.Column="0"
+                                                       Margin="5,0,5,5"
+                                                       FontWeight="Bold"
+                                                       VerticalContentAlignment="Center"
+                                                       HorizontalAlignment="Right" />
+                                <MOMControls:CMOMTextBox Name="txtUploadResultsIDW_ContentType"
+                                                         Text="N/A"
+                                                         Grid.Row="5"
+                                                         Grid.Column="1"
+                                                         Margin="0,0,5,5"
+                                                         FontWeight="Bold"
+                                                         FontFamily="Courier New"
+                                                         VerticalContentAlignment="Center"
+                                                         IsReadOnly="True"
+                                                         IsEnabled="False" />
+
+                                <MOMControls:CMOMLabel Content="Download URI:"
+                                                       Grid.Row="6"
+                                                       Grid.Column="0"
+                                                       Margin="5,0,5,5"
+                                                       FontWeight="Bold"
+                                                       VerticalContentAlignment="Center"
+                                                       HorizontalAlignment="Right" />
+                                <Grid Grid.Row="6"
+                                      Grid.Column="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <MOMControls:CMOMTextBox Name="txtUploadResultsIDW_DownloadURI"
+                                                             Text="N/A"
+                                                             Margin="0,0,5,5"
+                                                             FontWeight="Bold"
+                                                             FontFamily="Courier New"
+                                                             VerticalContentAlignment="Center"
+                                                             IsReadOnly="True"
+                                                             IsEnabled="False" />
+                                    <MOMControls:CMOMButton Name="btnUploadResultsIDW_DownloadFile"
+                                                            Content="Download"
+                                                            Grid.Column="1"
+                                                            Margin="0,0,5,5"
+                                                            FontWeight="Bold"
+                                                            Width="75"
+                                                            IsEnabled="False"
+                                                            Click="btnUploadResultsIDW_DownloadFile_Click" />
+                                </Grid>
+                            </Grid>
+                        </igWindows:TabItemEx>
+                    </igWindows:XamTabControl>
+                </Grid>
+            </igWindows:TabItemEx>
+            <igWindows:TabItemEx Header="Derivative Processing"
+                                 HeaderTemplate="{StaticResource Template_Header}">
+                <Grid Grid.IsSharedSizeScope="True">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="DERIVATIVE_SOURCE_COL1" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <MOMControls:CMOMLabel Content="Model URN:"
+                                               Grid.Row="0"
+                                               Grid.Column="0"
+                                               FontFamily="Bold"
+                                               Margin="5"
+                                               VerticalContentAlignment="Center"
+                                               HorizontalContentAlignment="Right" />
+                        <MOMControls:CMOMTextBox Name="txtDerivativeURN_Model"
+                                                 Text="N/A"
+                                                 Grid.Row="0"
+                                                 Grid.Column="1"
+                                                 Margin="0,5,5,5"
+                                                 VerticalContentAlignment="Center"
+                                                 FontWeight="Bold"
+                                                 FontFamily="Courier New"
+                                                 IsEnabled="False"
+                                                 IsReadOnly="True" />
+                        <MOMControls:CMOMButton Name="btnDerivativeRun_Model"
+                                                Content="Run"
+                                                Grid.Row="0"
+                                                Grid.Column="2"
+                                                Grid.RowSpan="2"
+                                                Margin="0,5,5,5"
+                                                Width="75"
+                                                FontWeight="Bold"
+                                                IsEnabled="False"
+                                                Click="btnDerivativeRun_Model_Click" />
+
+                        <MOMControls:CMOMLabel Content="Encoded:"
+                                               Grid.Row="1"
+                                               Grid.Column="0"
+                                               FontFamily="Bold"
+                                               Margin="5,0,5,5"
+                                               VerticalContentAlignment="Center"
+                                               HorizontalContentAlignment="Right" />
+                        <MOMControls:CMOMTextBox Name="txtDerivativeEncodedURN_Model"
+                                                 Text="N/A"
+                                                 Grid.Row="1"
+                                                 Grid.Column="1"
+                                                 Margin="0,0,5,5"
+                                                 VerticalContentAlignment="Center"
+                                                 FontWeight="Bold"
+                                                 FontFamily="Courier New"                                                 
+                                                 IsEnabled="False"
+                                                 IsReadOnly="True" />
+                        
+                        <MOMControls:CMOMLabel Content="Status:"
+                                               Grid.Row="2"
+                                               Grid.Column="0"
+                                               FontFamily="Bold"
+                                               Margin="5,0,5,5"
+                                               VerticalContentAlignment="Center"
+                                               HorizontalContentAlignment="Right" />
+                        <MOMControls:CMOMTextBox Name="txtDerivativeStatus_Model"
+                                                 Text="N/A"
+                                                 Grid.Row="2"
+                                                 Grid.Column="1"
+                                                 Margin="0,0,5,5"
+                                                 VerticalContentAlignment="Center"
+                                                 FontWeight="Bold"
+                                                 FontFamily="Courier New"
+                                                 IsEnabled="False"
+                                                 IsReadOnly="True" />
+                        <MOMControls:CMOMButton Name="btnDerivativeRefeshStatus_Model"
+                                                Content="Refresh"
+                                                Grid.Row="2"
+                                                Grid.Column="2"
+                                                Grid.ColumnSpan="1"
+                                                Margin="0,0,5,5"
+                                                IsEnabled="False"
+                                                Click="btnDerivativeRefeshStatus_Model_Click" />
+                    </Grid>
+                    <Rectangle Grid.Row="1"
+                               Margin="5,0,5,0"
+                               Height="2"
+                               Fill="Black" />
+                    <Grid Grid.Row="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="DERIVATIVE_SOURCE_COL1" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <MOMControls:CMOMLabel Content="Drawing URN:"
+                                               Grid.Row="0"
+                                               Grid.Column="0"
+                                               FontFamily="Bold"
+                                               Margin="5"
+                                               VerticalContentAlignment="Center"
+                                               HorizontalContentAlignment="Right" />
+                        <MOMControls:CMOMTextBox Name="txtDerivativeURN_Drawing"
+                                                 Text="N/A"
+                                                 Grid.Row="0"
+                                                 Grid.Column="1"
+                                                 Margin="0,5,5,5"
+                                                 VerticalContentAlignment="Center"
+                                                 FontWeight="Bold"
+                                                 FontFamily="Courier New"
+                                                 IsEnabled="False"
+                                                 IsReadOnly="True" />
+                        <MOMControls:CMOMButton Name="btnDerivativeRun_Drawing"
+                                                Content="Run"
+                                                Grid.Row="0"
+                                                Grid.Column="2"
+                                                Grid.RowSpan="2"
+                                                Margin="0,5,5,5"
+                                                Width="75"
+                                                FontWeight="Bold"
+                                                IsEnabled="False"
+                                                Click="btnDerivativeRun_Drawing_Click" />
+
+                        <MOMControls:CMOMLabel Content="Encoded:"
+                                               Grid.Row="1"
+                                               Grid.Column="0"
+                                               FontFamily="Bold"
+                                               Margin="5,0,5,5"
+                                               VerticalContentAlignment="Center"
+                                               HorizontalContentAlignment="Right" />
+                        <MOMControls:CMOMTextBox Name="txtDerivativeEncodedURN_Drawing"
+                                                 Text="N/A"
+                                                 Grid.Row="1"
+                                                 Grid.Column="1"
+                                                 Margin="0,0,5,5"
+                                                 VerticalContentAlignment="Center"
+                                                 FontWeight="Bold"
+                                                 FontFamily="Courier New"                                                 
+                                                 IsEnabled="False"
+                                                 IsReadOnly="True" />
+
+                        <MOMControls:CMOMLabel Content="Status:"
+                                               Grid.Row="2"
+                                               Grid.Column="0"
+                                               FontFamily="Bold"
+                                               Margin="5,0,5,5"
+                                               VerticalContentAlignment="Center"
+                                               HorizontalContentAlignment="Right" />
+                        <MOMControls:CMOMTextBox Name="txtDerivativeStatus_Drawing"
+                                                 Text="N/A"
+                                                 Grid.Row="2"
+                                                 Grid.Column="1"
+                                                 Margin="0,0,5,5"
+                                                 VerticalContentAlignment="Center"
+                                                 FontWeight="Bold"
+                                                 FontFamily="Courier New"
+                                                 IsEnabled="False"
+                                                 IsReadOnly="True" />
+                        <MOMControls:CMOMButton Name="btnDerivativeRefeshStatus_Drawing"
+                                                Content="Refresh"
+                                                Grid.Row="2"
+                                                Grid.Column="2"
+                                                Grid.ColumnSpan="1"
+                                                Margin="0,0,5,5"
+                                                IsEnabled="False"
+                                                Click="btnDerivativeRefeshStatus_Drawing_Click" />
+                    </Grid>
+                    <Rectangle Grid.Row="3"
+                               Margin="5,0,5,0"
+                               Height="2"
+                               Fill="Black" />
+                </Grid>
+            </igWindows:TabItemEx>
+            <igWindows:TabItemEx Header="Viewer"
+                                 HeaderTemplate="{StaticResource Template_Header}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <MOMControls:CMOMLabel Content="Part Number:"
+                                           FontWeight="Bold"
+                                           Margin="5"
+                                           VerticalAlignment="Center"
+                                           HorizontalContentAlignment="Right" />
+                    <MOMControls:CMOMTextBox Name="txtViewerPartNumber"
+                                             Grid.Column="1"
+                                             Margin="0,5,5,5"
+                                             Width="150"
+                                             FontWeight="Bold"
+                                             VerticalContentAlignment="Center"
+                                             IsEnabled="False"
+                                             PreviewKeyDown="txtViewerPartNumber_PreviewKeyDown"
+                                             TextChanged="txtViewerPartNumber_TextChanged"/>
+                    <MOMControls:CMOMButton Name="btnViewerSearch"
+                                            Content="Search"
+                                            Grid.Column="2"
+                                            Margin="0,5,5,5"
+                                            FontWeight="Bold"
+                                            Width="55"
+                                            HorizontalAlignment="Left"
+                                            IsEnabled="False"
+                                            Click="btnViewerSearch_Click" />
+
+                    <Rectangle Grid.Row="1"
+                               Grid.ColumnSpan="3"
+                               Margin="5,0,5,0" 
+                               Fill="Black"
+                               Height="3" />
+
+                    <Grid Grid.Row="2"
+                          Grid.ColumnSpan="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            
+                            <local_ViewerUI:ctlForgeViewer x:Name="viewerModel"
+                                                           Grid.Column="0"/>
+                            <MOMControls:CMOMButton Name="btnExportHTML_Model"
+                                                    Content="Export HTML"
+                                                    Grid.Row="1"
+                                                    Margin="0,5,5,0"
+                                                    FontWeight="Bold"
+                                                    IsEnabled="False"
+                                                    Click="btnExportHTML_Model_Click" />
+                        </Grid>
+                        <Rectangle Grid.Column="1"
+                                   Margin="0"
+                                   Fill="Black"
+                                   Width="3" />
+                        <Grid Grid.Column="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <local_ViewerUI:ctlForgeViewer x:Name="viewerDrawing"
+                                                           Grid.Column="0"/>
+                            <MOMControls:CMOMButton Name="btnExportHTML_Drawing"
+                                                    Content="Export HTML"
+                                                    Grid.Row="1"
+                                                    Margin="5,5,0,0"
+                                                    FontWeight="Bold"
+                                                    IsEnabled="False"
+                                                    Click="btnExportHTML_Drawing_Click" />
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </igWindows:TabItemEx>
+            <igWindows:TabItemEx Header="Parts DB"
+                                 HeaderTemplate="{StaticResource Template_Header}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <MOMControls:CMOMTextBox Name="txtPartDB"
+                                             Text="[NO PARTS DATABASE FOUND]"
+                                             VerticalScrollBarVisibility="Visible"
+                                             HorizontalScrollBarVisibility="Auto"
+                                             TextWrapping="NoWrap"
+                                             AcceptsReturn="True"
+                                             AcceptsTab="True"
+                                             IsReadOnly="True"
+                                             IsEnabled="False" />
+                </Grid>
+            </igWindows:TabItemEx>
+            <igWindows:TabItemEx Header="API Log"
+                                 HeaderTemplate="{StaticResource Template_Header}">
+                <MOMControls:CMOMDataGrid Name="gridAPILog"
+                                          GroupByAreaLocation="None"
+                                          SelectedItemsChanged="gridAPILog_SelectedItemsChanged">
+                    <MOMControls:CMOMDataGrid.Resources>
+                        <Style TargetType="igEditors:XamDateTimeEditor">
+                            <Setter Property="ValueToTextConverter"
+                                    Value="{StaticResource Converter_DateTimeToTimeString}" />
+                            <Setter Property="ValueToDisplayTextConverter"
+                                    Value="{StaticResource Converter_DateTimeToTimeString}" />
+                        </Style>
+                        <Style TargetType="{x:Type igDP:DataRecordPresenter}">
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                </Trigger>
+                            </Style.Triggers>
+                            <EventSetter Event="MouseDoubleClick" Handler="gridAPILog_RecordMouseDoubleClick" />
+                        </Style>
+                        <Style TargetType="{x:Type igDP:HeaderLabelArea}">
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Style>
+                        <Style x:Key="Style_CVP_Base"
+                               TargetType="{x:Type igDP:CellValuePresenter}">
+                            <Setter Property="BorderBrush" Value="Black" />
+                            <Setter Property="BorderThickness" Value="0,0,1,1" />
+                            <Setter Property="Padding" Value="3,3,3,3" />
+                        </Style>
+                    </MOMControls:CMOMDataGrid.Resources>
+                    <MOMControls:CMOMDataGrid.FieldLayouts>
+                        <igDP:FieldLayout>
+                            <igDP:FieldLayout.Settings>
+                                <igDP:FieldLayoutSettings 
+                                    AutoGenerateFields="False" 
+                                    AllowAddNew="False"
+                                    AllowDelete="False" 
+                                    SelectionTypeRecord="Single"
+                                    AutoFitMode="ExtendLastField" />
+                            </igDP:FieldLayout.Settings>
+                            <igDP:FieldLayout.SortedFields>
+                                <igDP:FieldSortDescription FieldName="Ticks"
+                                                           IsGroupBy="False"
+                                                           Direction="Descending" />
+                            </igDP:FieldLayout.SortedFields>
+                            <igDP:FieldLayout.Fields>
+                                <igDP:Field Name="Ticks"
+                                    Visibility="Collapsed" />
+                                <igDP:Field Name="LogDate"
+                                            Label="Time">
+                                    <igDP:Field.Settings>
+                                        <igDP:FieldSettings 
+                                            CellClickAction="SelectRecord" 
+                                            AllowEdit="False" 
+                                            LabelClickAction="Nothing"
+                                            Width="Auto"                                          
+                                            CellValuePresenterStyle="{StaticResource Style_CVP_Base}"/>
+                                    </igDP:Field.Settings>
+                                </igDP:Field>
+                                <igDP:Field Name="StatusCode"
+                                            Label="Status" >
+                                    <igDP:Field.Settings>
+                                        <igDP:FieldSettings 
+                                            LabelClickAction="Nothing"
+                                            CellClickAction="SelectRecord" 
+                                            AllowEdit="False" 
+                                            Width="Auto"
+                                            CellValuePresenterStyle="{StaticResource Style_CVP_Base}"/>
+                                    </igDP:Field.Settings>
+                                </igDP:Field>
+                                <igDP:Field Name="URI"
+                                            Label="URI" >
+                                    <igDP:Field.Settings>
+                                        <igDP:FieldSettings 
+                                            LabelClickAction="Nothing"
+                                            CellClickAction="SelectRecord" 
+                                            AllowEdit="False" 
+                                            Width="Auto"
+                                            CellValuePresenterStyle="{StaticResource Style_CVP_Base}"/>
+                                    </igDP:Field.Settings>
+                                </igDP:Field>
+                            </igDP:FieldLayout.Fields>
+                        </igDP:FieldLayout>
+                    </MOMControls:CMOMDataGrid.FieldLayouts>
+                </MOMControls:CMOMDataGrid>
+            </igWindows:TabItemEx>
+        </igWindows:XamTabControl>
+        <MOMShared:CLabelStatus Name="lblStatus"
+                                Grid.Row="1"
+                                Margin="5,0,5,5" />
+    </Grid>
+</MOMShared:CMOMForm>

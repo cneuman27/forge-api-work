@@ -1,0 +1,24 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+        "outDir": "./lib",
+        "sourceMap": false,
+        "declaration": true,
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "target": "es5",
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+        "lib": [
+            "es2016",
+            "dom"
+        ],
+        "alwaysStrict": true,
+        "baseUrl": ".",
+        "paths": {
+            "@jci-ahu/ui.shared.polygon-generator": [ "./src/app/polygon-generator" ]
+        }
+    }
+}
