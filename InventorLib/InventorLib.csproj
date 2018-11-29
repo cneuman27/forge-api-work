@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <ResolveComReferenceSilent>True</ResolveComReferenceSilent>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <NoWarn>1701;1702;3305</NoWarn>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Reference Include="Autodesk.Inventor.Interop">
+        <HintPath>..\_3rdParty\autodesk.inventor.interop.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+</Project>
