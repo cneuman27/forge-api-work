@@ -112,15 +112,17 @@ namespace InventorLib
         {
             Console.WriteLine("Trying to connect to Inventor...");
             Application app = null;
+
             try
             {
                 app = GetActiveObject(PROG_ID) as Application;
                 Console.WriteLine($"Connected to Inventor {app.SoftwareVersion.DisplayName}");
             }
-            catch /*(Exception e)*/
+            catch (Exception e)
             {
-                //Console.WriteLine($"Could not connect to running Inventor Instance... ({e.Message})");
+                Console.WriteLine($"Could not connect to running Inventor Instance... ({e.Message})");
             }
+
             return app;
         }
 
@@ -133,8 +135,7 @@ namespace InventorLib
 
                 if (_CreatedByUs)
                 {
-                    // Uncomment to close the Inventor instance
-                    //_Instance.Quit();
+                    _Instance.Quit();
                 }
 
                 Console.WriteLine("Detaching from Inventor...");

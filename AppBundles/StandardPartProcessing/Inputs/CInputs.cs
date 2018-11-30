@@ -14,9 +14,12 @@ namespace StandardPartProcessing.Inputs
         private string m_Reference = "";
         private string m_PartNumber = "";
         private string m_Description = "";
+        private string m_MaterialType = "";
+
         private string m_IPTFile = "";
         private string m_IDWFile = "";
-        private string m_XLSFile = "";
+        private string m_XLSFile = "";        
+
         private Dictionary<string, string> m_Parameters = new Dictionary<string, string>();
 
         public CInputs()
@@ -42,6 +45,13 @@ namespace StandardPartProcessing.Inputs
         {
             get { return m_Description; }
             set { m_Description = value; }
+        }
+        
+        [JsonProperty("MaterialType")]
+        public string MaterialType
+        {
+            get { return m_MaterialType; }
+            set { m_MaterialType = value; }
         }
 
         [JsonProperty("IPTFile")]

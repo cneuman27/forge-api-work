@@ -41,6 +41,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,7 +54,10 @@
     <Compile Include="CConstants.cs" />
     <Compile Include="CHeartBeat.cs" />
     <Compile Include="CProcessor.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="Inputs\CInputs.cs" />
+    <Compile Include="Outputs\CArtifact.cs" />
+    <Compile Include="Outputs\COutputs.cs" />
     <Compile Include="Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -60,9 +65,30 @@
     <None Include="Inputs\sample.json" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="MOM.SpatialSATLib">
+      <Version>2018.11.30.1006</Version>
+    </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>11.0.2</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DXFProcessor\DXFProcessor.csproj">
+      <Project>{ef1d3838-c75f-4a8a-b21d-b5a04ca33bf8}</Project>
+      <Name>DXFProcessor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ForgeAPI\ForgeAPI.Autofac\ForgeAPI.Autofac.csproj">
+      <Project>{d515dd2e-7e2f-4e8e-8b02-057a10d6c4f8}</Project>
+      <Name>ForgeAPI.Autofac</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ForgeAPI\ForgeAPI.Interface\ForgeAPI.Interface.csproj">
+      <Project>{ccacc704-61d7-407c-892a-4c365bf3ff60}</Project>
+      <Name>ForgeAPI.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\InventorLib\InventorLib.csproj">
+      <Project>{416c3a97-8c65-44d6-ab20-f44a86fee28e}</Project>
+      <Name>InventorLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
