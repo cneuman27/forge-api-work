@@ -2,7 +2,7 @@
 
 Temporary repository to hold testing and experimental code to access the Forge API.
 
-You may need to set up a local nuget source to access ModelAccess.AHU.AspNet (in UnitViewer.API) and MOM.Shared.WPF (in ForgeTest).  If this is necessary, nuget packages are in the jci-packages folder...
+You may need to set up a local nuget source to access ModelAccess.AHU.AspNet (in UnitViewer.API), MOM.Shared.WPF (in ForgeTest), MOM.SpatialSATLib (in StandardPartProcessing) .  If this is necessary, nuget packages are in the jci-packages folder...
 
 
 Solution contains the following:
