@@ -4,7 +4,7 @@
     "private": true,
     "description": "Unit Viewer (Forge POC) - Client",
     "scripts": {},
-    "dependencies": {
+    "dependencies": { 
         "@angular/animations": "^6.0.9",
         "@angular/common": "^6.0.9",
         "@angular/compiler": "^6.0.9",
