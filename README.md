@@ -17,7 +17,7 @@ Solution contains the following:
     
 3.) ForgeAPI
 
-    .NET standard access wrappers for the Forge REST API
+    .NET(Standard) access wrappers for the Forge REST API
     Includes IoC Containers for ASP.NET and Autofac
     
 4.) UnitViewer
@@ -27,7 +27,7 @@ Solution contains the following:
     
 5.) ForgeTest
   
-    .NET WPF Client to understand various ForgeAPI endpoints (Data Management, Model Derivative, Viewer) 
+    .NET WPF client used to understand various ForgeAPI endpoints (Data Management, Model Derivative, Viewer) 
     and test access wrapper libraries 
     
 6.) InventorLib
