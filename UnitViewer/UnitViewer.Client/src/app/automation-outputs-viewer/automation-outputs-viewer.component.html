@@ -1,0 +1,74 @@
+﻿<grid-layout>
+    <row-definition-container>
+        <row-definition height="auto"></row-definition>
+        <row-definition height="auto"></row-definition>
+        <row-definition height="auto"></row-definition>
+        <row-definition height="*"></row-definition>
+    </row-definition-container>
+    <column-definition-container>
+        <column-definition width="*"></column-definition>
+    </column-definition-container>
+
+    <ui-file grid-cell
+             grid-row="1"
+             grid-column="1"
+             filelabel="Results File:"
+             [showdownload]="false"
+             extensionfilter=".json"
+             (fileselected)="onResultsFileSelected($event)">
+    </ui-file>
+    <grid-layout grid-cell
+                 grid-row="2"
+                 grid.column="1"
+                 style="margin-top: 10px;">
+        <row-definition-container>
+            <row-definition height="auto"></row-definition>
+        </row-definition-container>
+        <column-definition-container>
+            <column-definition width="400"></column-definition>
+            <column-definition width="*"></column-definition>
+        </column-definition-container>
+
+        <div grid-cell
+             grid-row="1"
+             grid-column="1"
+             class="input-group">
+            <div class="input-group-prepend">
+                <span  class="input-group-text" 
+                       style="user-select:none;">Part Number:</span>
+            </div>
+            <span class="form-control">{{(partNumber === null || partNumber.length === 0) ? "N/A" : partNumber}}</span>
+        </div>
+        <div grid-cell
+             grid-row="1"
+             grid-column="2"
+             class="input-group"
+             style="padding-left: 10px;">
+            <div class="input-group-prepend">
+                <span class="input-group-text"
+                      style="user-select:none;">Reference:</span>
+            </div>
+            <span class="form-control">{{(reference === null || reference.length === 0) ? "N/A" : reference}}</span>
+        </div>
+    </grid-layout>
+    <div grid-cell
+         grid-row="3"
+         grid-column="1"
+         class="input-group"
+         style="margin-top: 10px; width:50%;">
+        <div class="input-group-prepend">
+            <label for="cmbArtifactType"
+                   class="input-group-text">Artifact Type:</label>
+        </div>
+        <select id="cmbArtifactType"
+                class="custom-select"
+                [(ngModel)]="">
+        </select>
+    </div>
+    <div grid-cell
+         grid-row="4"
+         grid-column="1"
+         style="position:relative;">
+        <forge-viewer style="position:absolute; top:10px; bottom:0; left: 0; right: 0;"></forge-viewer>
+    </div>
+</grid-layout>

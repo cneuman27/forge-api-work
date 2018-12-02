@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 
 using Inventor;
-
+ 
 namespace StandardPartProcessing
 {
     [Guid("575A7C50-A78F-4FE3-AEF9-2C16B37D7924")]

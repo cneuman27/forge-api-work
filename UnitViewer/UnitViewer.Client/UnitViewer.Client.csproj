@@ -11,16 +11,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="src\app\automation-outputs-viewer\CArtifact.ts" />
     <None Remove="src\app\forge-viewer\forge-viewer.component.ts" />
     <None Remove="src\app\services\forge-api.service.ts" />
     <None Remove="src\app\types\CAuthenticationToken.ts" />
+    <None Remove="src\app\unit-viewer\unit-viewer.component.ts" />
     <None Remove="src\app\_main\CConverters.ts" />
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="src\app\automation-outputs-viewer\CArtifact.ts" />
     <TypeScriptCompile Include="src\app\forge-viewer\forge-viewer.component.ts" />
     <TypeScriptCompile Include="src\app\services\forge-api.service.ts" />
     <TypeScriptCompile Include="src\app\types\CAuthenticationToken.ts" />
-    <TypeScriptCompile Include="src\app\_main\CConverters.ts" />
+    <TypeScriptCompile Include="src\app\unit-viewer\unit-viewer.component.ts" />
+    <TypeScriptCompile Include="src\app\unit-viewer\CConverters.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="src\app\ui\file\" />
   </ItemGroup>
 </Project>

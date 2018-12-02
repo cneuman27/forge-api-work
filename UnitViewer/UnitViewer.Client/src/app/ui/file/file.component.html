@@ -1,0 +1,35 @@
+﻿<div class="input-group">
+    <div class="input-group-prepend">
+        <label for="txtFileName"
+               class="input-group-text">{{fileLabel}}</label>
+    </div>
+    <span class="form-control">{{(fileName === null || fileName.length === 0) ? "N/A" : fileName}}</span>
+
+    <div class="input-group-append"
+         *ngIf="showDownload">
+        <button class="btn btn-outline-secondary"
+                type="button"
+                [disabled]="!isEnabled"
+                (click)="onDownloadClicked($event)"
+                style="width:50px;">
+            <fa-icon icon="download"
+                     style="width: 1.2rem; cursor: pointer;">
+            </fa-icon>
+        </button>
+    </div>
+    <div class="input-group-append">
+        <label class="btn btn-outline-secondary"
+              [ngClass]="{'disabled': !isEnabled}"
+              style="width:50px; margin-bottom: 0px;">
+            <input type="file" 
+                   style="display:none" 
+                   [disabled]="!isEnabled"
+                   [accept]="extensionFilter"
+                   (change)="onFileSelected($event)"/>
+            <fa-icon icon="upload"
+                     style="width: 1.2rem; "
+                     [ngStyle]="{'pointer': (isEnabled ? 'pointer' : 'none')}">
+            </fa-icon>
+        </label>
+    </div>
+</div>

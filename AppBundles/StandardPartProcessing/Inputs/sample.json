@@ -6,6 +6,7 @@
     "IPTFile": "086-00101-064.ipt",
     "IDWFile": "086-00101-064.idw",
     "XLSFile": "Calc_00001_011.xls",
+    "BucketKey": "jci_mom_forge_test",
     "Parameters": {
         "Seg_H": "42",
         "Seg_W": "81",

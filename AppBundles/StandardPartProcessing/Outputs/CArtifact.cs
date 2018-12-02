@@ -14,6 +14,7 @@ namespace StandardPartProcessing.Outputs
         private Enums.E_ArtifactType m_Type = Enums.E_ArtifactType.Undefined;
         private string m_FileName = "";
         private string m_URN = "";
+        private string m_URNEncoded = "";
 
         private string m_FileLocation = "";
 
@@ -41,6 +42,13 @@ namespace StandardPartProcessing.Outputs
         {
             get { return m_URN; }
             set { m_URN = value; }
+        }
+
+        [JsonProperty("URNEncoded")]
+        public string URNEncoded
+        {
+            get { return m_URNEncoded; }
+            set { m_URNEncoded = value; }
         }
 
         public string FileLocation

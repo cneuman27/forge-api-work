@@ -4,7 +4,7 @@
     "private": true,
     "description": "Unit Viewer (Forge POC) - Client",
     "scripts": {},
-    "dependencies": { 
+    "dependencies": {
         "@angular/animations": "^6.0.9",
         "@angular/common": "^6.0.9",
         "@angular/compiler": "^6.0.9",
@@ -59,6 +59,7 @@
         "@jci-ahu/shared.guid": "file://../../jci-packages/@jci-ahu_shared.guid 3.0.0.tgz",
         "@jci-ahu/shared.utility": "file://../../jci-packages/@jci-ahu_shared.utility 3.0.0.tgz",
         "@jci-ahu/ui.shared.clipper": "file://../../jci-packages/@jci-ahu_ui.shared.clipper 1.0.0.tgz",
+        "@jci-ahu/ui.shared.grid-layout": "file://../../jci-packages/@jci-ahu_ui.shared.grid-layout 2.0.7.tgz",
         "bootstrap": "4.1.2",
         "core-js": "^2.5.7",
         "jquery": "^3.3.1",

@@ -62,12 +62,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Inputs\sample.json" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="MOM.SpatialSATLib">
-      <Version>2018.11.30.1006</Version>
-    </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>11.0.2</Version>
     </PackageReference>

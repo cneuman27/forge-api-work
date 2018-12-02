@@ -18,7 +18,9 @@ namespace StandardPartProcessing.Inputs
 
         private string m_IPTFile = "";
         private string m_IDWFile = "";
-        private string m_XLSFile = "";        
+        private string m_XLSFile = "";
+
+        private string m_BucketKey = "";
 
         private Dictionary<string, string> m_Parameters = new Dictionary<string, string>();
 
@@ -73,6 +75,13 @@ namespace StandardPartProcessing.Inputs
         {
             get { return m_XLSFile; }
             set { m_XLSFile = value; }
+        }
+
+        [JsonProperty("BucketKey")]
+        public string BucketKey
+        {
+            get { return m_BucketKey; }
+            set { m_BucketKey = value; }
         }
 
         [JsonProperty("Parameters")]

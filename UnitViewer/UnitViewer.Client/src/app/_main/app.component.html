@@ -1,35 +1,6 @@
-﻿<div class="container"
-     style="margin: 0px; margin-top: 5px; padding: 0px; width: 100%; height:100%;">
-    <div class="input-group"
-         style="width:500px;">
-        <input type="text"
-               class="form-control"
-               [(ngModel)]="_orderNumber"
-               [disabled]="!_ready"
-               placeholder="Enter Order Number"
-               style="background-color: white; color: black; font-weight:bold; opacity: 1;" />
-        <div class="input-group-btn">
-            <button class="btn btn-default"
-                    type="button"
-                    [disabled]="!isEnabled_LoadUnit"
-                    (click)="loadUnit_OnClick($event)">
-                Load Unit
-            </button>
-        </div>
-    </div>
-    <div class="checkbox">
-        <label>
-            <input type="checkbox"
-                   [(ngModel)]="showContainer"
-                   [disabled]="!isEnabled_ShowContainer" />
-            Show Container
-        </label>
-    </div>
-    <forge-viewer #viewer
-                  style="position:absolute; width: 98.5%; height:86%; margin-top:5px;">
-    </forge-viewer>
+﻿<!--<unit-viewer [isready]="_ready"
+             style="margin: 0px; margin-top: 5px; padding: 0px; width: 100%; height:100%;">
+</unit-viewer>-->
+<automation-outputs-viewer>
 
-    <!--
-    style="position:absolute; width: 98.5%; height:90%; margin-top:5px;"
-        -->
-</div>
+</automation-outputs-viewer>

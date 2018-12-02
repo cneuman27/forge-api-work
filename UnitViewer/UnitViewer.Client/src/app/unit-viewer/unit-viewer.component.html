@@ -1,0 +1,36 @@
+﻿<div>
+    <div class="input-group"
+         style="width:500px;">
+        <input type="text"
+               class="form-control"
+               [(ngModel)]="_orderNumber"
+               [disabled]="!_ready"
+               placeholder="Enter Order Number"
+               style="background-color: white; color: black; font-weight:bold; opacity: 1;" />
+        <div class="input-group-append">
+            <button class="btn btn-default"
+                    type="button"
+                    [disabled]="!isEnabled_LoadUnit"
+                    (click)="loadUnit_OnClick($event)">
+                Load Unit
+            </button>
+        </div>
+        <div>
+            <div style="margin-top: 5px; margin-left: 10px; font-weight:bold;">
+                <label>
+                    <input type="checkbox"
+                           [(ngModel)]="showContainer"
+                           [disabled]="!isEnabled_ShowContainer" />
+                    Show Placeholder
+                </label>
+            </div>
+        </div>
+    </div>
+    <forge-viewer #viewer
+                  style="position:absolute; width: 98.5%; height:86%; margin-top:5px;">
+    </forge-viewer>
+
+    <!--
+    style="position:absolute; width: 98.5%; height:90%; margin-top:5px;"
+        -->
+</div>
