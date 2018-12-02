@@ -28,6 +28,6 @@
     }
     public set urnEncoded(value: string)
     {
-        this.urnEncoded = value; 
+        this._urnEncoded = value; 
     }
 }

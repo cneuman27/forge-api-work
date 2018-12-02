@@ -62,13 +62,18 @@
         </div>
         <select id="cmbArtifactType"
                 class="custom-select"
-                [(ngModel)]="">
+                [(ngModel)]="selectedArtifact">
+            <option *ngFor="let artifact of artifactList"
+                    [ngValue]="artifact">
+                {{artifact.name}}
+            </option>
         </select>
     </div>
     <div grid-cell
          grid-row="4"
          grid-column="1"
          style="position:relative;">
-        <forge-viewer style="position:absolute; top:10px; bottom:0; left: 0; right: 0;"></forge-viewer>
+        <forge-viewer #viewer
+                      style="position:absolute; top:10px; bottom:0; left: 0; right: 0;"></forge-viewer>
     </div>
 </grid-layout>

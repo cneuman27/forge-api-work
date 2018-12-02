@@ -49,6 +49,9 @@ export class ForgeViewerComponent implements AfterViewInit, OnDestroy
         urn: string,
         callback)
     {
+        this._viewer.tearDown();
+        //this._viewer.start();
+
         Autodesk.Viewing.Document.load(
             urn,
             (doc) =>

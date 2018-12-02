@@ -38,7 +38,7 @@ export class AutomationOutputViewerComponent
         if (this._selectedArtifact != null)
         {
             this._viewer.loadURN(
-                this._selectedArtifact.urnEncoded,
+                `urn:${this._selectedArtifact.urnEncoded}`,
                 null);
         }
     }
