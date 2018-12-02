@@ -34,7 +34,7 @@ Solution contains the following:
     .NET WPF client used to understand various ForgeAPI endpoints (Data Management, Model Derivative, Viewer) 
     and test access wrapper libraries 
     
-7.) InventorLib
+7.) InventorConnector / InventorLib
 
     Test harness and Inventor API facade for Design Automation testing and debugging    
     
