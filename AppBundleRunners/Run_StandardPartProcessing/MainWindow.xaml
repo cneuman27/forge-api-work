@@ -90,6 +90,7 @@
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
@@ -101,12 +102,20 @@
                                     Width="100"
                                     IsEnabled="False"
                                     Click="btnRun_Click" />
-            <MOMShared:CLabelStatus Name="lblStatus"
+            <MOMControls:CMOMButton Name="btnAPILog"
+                                    Content="API Log"
                                     Grid.Column="1"
+                                    FontWeight="Bold"
+                                    Margin="0,5,5,5"
+                                    Width="100"
+                                    IsEnabled="False"
+                                    Click="btnAPILog_Click" />
+            <MOMShared:CLabelStatus Name="lblStatus"
+                                    Grid.Column="2"
                                     Margin="3" />
             <MOMControls:CMOMButton Name="btnClose"
                                     Content="Close"
-                                    Grid.Column="2"
+                                    Grid.Column="3"
                                     Margin="5"
                                     Width="100"
                                     Click="btnClose_Click" />

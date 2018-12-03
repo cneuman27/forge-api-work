@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using ForgeAPI.Interface.REST;
 
@@ -9,7 +10,9 @@ namespace ForgeAPI.Implementation.REST
         private string m_URI = "";
         private string m_Method = "";
         private HttpStatusCode m_StatusCode = HttpStatusCode.NotImplemented;
-        
+
+        private DateTime m_RequestTime = DateTime.Now;
+
         private string m_RequestData = "";
         private byte[] m_RequestBinaryData = null;
         private List<KeyValuePair<string, string>> m_RequestHeaders = new List<KeyValuePair<string, string>>();
@@ -32,6 +35,11 @@ namespace ForgeAPI.Implementation.REST
         {
             get { return m_StatusCode; }
             set { m_StatusCode = value; }
+        }
+
+        public DateTime RequestTime
+        {
+            get { return m_RequestTime; }
         }
 
         public string RequestData

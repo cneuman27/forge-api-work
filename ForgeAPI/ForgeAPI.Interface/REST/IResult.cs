@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 
 namespace ForgeAPI.Interface.REST
@@ -18,6 +19,11 @@ namespace ForgeAPI.Interface.REST
             get;
         }
 
+        DateTime RequestTime
+        {
+            get;
+        }
+
         string RequestData
         {
             get;
@@ -30,7 +36,7 @@ namespace ForgeAPI.Interface.REST
         {
             get;
         }
-
+                
         string ResponseData
         {
             get;

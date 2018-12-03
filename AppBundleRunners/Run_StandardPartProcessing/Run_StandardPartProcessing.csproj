@@ -63,14 +63,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="APILog\CFrmAPILog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="APILog\CFrmAPILogDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="APILog\CFrmAPILog.xaml.cs">
+      <DependentUpon>CFrmAPILog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="APILog\CFrmAPILogDetails.xaml.cs">
+      <DependentUpon>CFrmAPILogDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="APILog\CHeaderWrapper.cs" />
+    <Compile Include="APILog\CResultWrapper.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Converters\Converter_DateTimeToTimeString.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -107,13 +124,17 @@
       <Version>2018.5.22.1</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>11.0.1</Version>
+      <Version>11.0.2</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\AppBundles\StandardPartProcessing\StandardPartProcessing.csproj">
       <Project>{e45265df-5a3d-4508-876c-3c3d78e9b62e}</Project>
       <Name>StandardPartProcessing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ForgeAPI\ForgeAPI.Interface\ForgeAPI.Interface.csproj">
+      <Project>{ccacc704-61d7-407c-892a-4c365bf3ff60}</Project>
+      <Name>ForgeAPI.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\InventorConnector\InventorConnector.csproj">
       <Project>{a3ecd75f-2cad-4c83-8447-0f2ad52c9b77}</Project>

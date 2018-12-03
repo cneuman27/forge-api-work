@@ -1,0 +1,139 @@
+﻿<MOMShared:CMOMForm x:Class="Run_StandardPartProcessing.APILog.CFrmAPILog"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:MOMControls="clr-namespace:MOMControls;assembly=MOMControls"
+                    xmlns:MOMShared="clr-namespace:MOMShared;assembly=MOMShared"
+                    xmlns:local_Converters="clr-namespace:Run_StandardPartProcessing.Converters"
+                    xmlns:igDP="http://infragistics.com/DataPresenter"
+                    xmlns:igEditors="http://infragistics.com/Editors"
+                    mc:Ignorable="d"
+                    Title="API Log" 
+                    WindowStartupLocation="CenterOwner"
+                    Height="450" Width="800">
+    <MOMShared:CMOMForm.Resources>
+        <local_Converters:Converter_DateTimeToTimeString x:Key="Converter_DateTimeToTimeString" />
+    </MOMShared:CMOMForm.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <MOMControls:CMOMDataGrid Name="gridAPILog"
+                                  Margin="5"
+                                  GroupByAreaLocation="None"
+                                  SelectedItemsChanged="gridAPILog_SelectedItemsChanged">
+            <MOMControls:CMOMDataGrid.Resources>
+                <Style TargetType="igEditors:XamDateTimeEditor">
+                    <Setter Property="ValueToTextConverter"
+                                    Value="{StaticResource Converter_DateTimeToTimeString}" />
+                    <Setter Property="ValueToDisplayTextConverter"
+                                    Value="{StaticResource Converter_DateTimeToTimeString}" />
+                </Style>
+                <Style TargetType="{x:Type igDP:DataRecordPresenter}">
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Trigger>
+                    </Style.Triggers>
+                    <EventSetter Event="MouseDoubleClick" Handler="gridAPILog_RecordMouseDoubleClick" />
+                </Style>
+                <Style TargetType="{x:Type igDP:HeaderLabelArea}">
+                    <Setter Property="FontWeight" Value="Bold" />
+                </Style>
+                <Style x:Key="Style_CVP_Base"
+                               TargetType="{x:Type igDP:CellValuePresenter}">
+                    <Setter Property="BorderBrush" Value="Black" />
+                    <Setter Property="BorderThickness" Value="0,0,1,1" />
+                    <Setter Property="Padding" Value="3,3,3,3" />
+                </Style>
+            </MOMControls:CMOMDataGrid.Resources>
+            <MOMControls:CMOMDataGrid.FieldLayouts>
+                <igDP:FieldLayout>
+                    <igDP:FieldLayout.Settings>
+                        <igDP:FieldLayoutSettings 
+                                    AutoGenerateFields="False" 
+                                    AllowAddNew="False"
+                                    AllowDelete="False" 
+                                    SelectionTypeRecord="Single"
+                                    AutoFitMode="ExtendLastField" />
+                    </igDP:FieldLayout.Settings>
+                    <igDP:FieldLayout.SortedFields>
+                        <igDP:FieldSortDescription FieldName="Ticks"
+                                                           IsGroupBy="False"
+                                                           Direction="Descending" />
+                    </igDP:FieldLayout.SortedFields>
+                    <igDP:FieldLayout.Fields>
+                        <igDP:Field Name="Ticks"
+                                    Visibility="Collapsed" />
+                        <igDP:Field Name="LogDate"
+                                            Label="Time">
+                            <igDP:Field.Settings>
+                                <igDP:FieldSettings 
+                                            CellClickAction="SelectRecord" 
+                                            AllowEdit="False" 
+                                            LabelClickAction="Nothing"
+                                            Width="Auto"                                          
+                                            CellValuePresenterStyle="{StaticResource Style_CVP_Base}"/>
+                            </igDP:Field.Settings>
+                        </igDP:Field>
+                        <igDP:Field Name="StatusCode"
+                                            Label="Status" >
+                            <igDP:Field.Settings>
+                                <igDP:FieldSettings 
+                                            LabelClickAction="Nothing"
+                                            CellClickAction="SelectRecord" 
+                                            AllowEdit="False" 
+                                            Width="Auto"
+                                            CellValuePresenterStyle="{StaticResource Style_CVP_Base}"/>
+                            </igDP:Field.Settings>
+                        </igDP:Field>
+                        <igDP:Field Name="URI"
+                                            Label="URI" >
+                            <igDP:Field.Settings>
+                                <igDP:FieldSettings 
+                                            LabelClickAction="Nothing"
+                                            CellClickAction="SelectRecord" 
+                                            AllowEdit="False" 
+                                            Width="Auto"
+                                            CellValuePresenterStyle="{StaticResource Style_CVP_Base}"/>
+                            </igDP:Field.Settings>
+                        </igDP:Field>
+                    </igDP:FieldLayout.Fields>
+                </igDP:FieldLayout>
+            </MOMControls:CMOMDataGrid.FieldLayouts>
+        </MOMControls:CMOMDataGrid>
+        <Rectangle Grid.Row="1"
+                   Margin="5,0,5,0"
+                   Fill="Black"
+                   Height="2" />
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <MOMControls:CMOMButton Name="btnDetails"
+                                    Content="Details"
+                                    Margin="5"
+                                    FontWeight="Bold"
+                                    Width="100"
+                                    IsEnabled="False"
+                                    Click="btnDetails_Click" />
+            <MOMShared:CLabelStatus Name="lblStatus"
+                                    Grid.Column="1"
+                                    Margin="3" />
+            <MOMControls:CMOMButton Name="btnClose"
+                                    Content="Close"
+                                    Grid.Column="2"
+                                    Margin="5"
+                                    Width="100"
+                                    FontWeight="Bold"
+                                    Click="btnClose_Click" />
+        </Grid>
+    </Grid>
+</MOMShared:CMOMForm>

@@ -11,15 +11,25 @@ namespace ForgeAPI.Implementation.REST
     public class CService : IService, IDisposable
     {
         private HttpClient m_Client = null;
+        private List<IResult> m_APILog = null;
 
         public CService()
         {
             WinHttpHandler handler;
 
-            handler = new WinHttpHandler();
-            handler.WindowsProxyUsePolicy = WindowsProxyUsePolicy.UseWinInetProxy;          
+            handler = new WinHttpHandler
+            {
+                WindowsProxyUsePolicy = WindowsProxyUsePolicy.UseWinInetProxy
+            };
 
             m_Client = new HttpClient(handler);
+
+            m_APILog = new List<IResult>();
+        }
+
+        public List<IResult> APILog
+        {
+            get { return m_APILog; }
         }
 
         public IResult Post(
@@ -63,6 +73,8 @@ namespace ForgeAPI.Implementation.REST
                 .ToList()
                 .ForEach(i => i.Value.ToList().ForEach(j => res.ResponseHeaders.Add(new KeyValuePair<string, string>(i.Key, j))));
 
+            m_APILog.Add(res);
+
             return res;
         }
 
@@ -97,6 +109,8 @@ namespace ForgeAPI.Implementation.REST
             response.Headers
                 .ToList()
                 .ForEach(i => i.Value.ToList().ForEach(j => res.ResponseHeaders.Add(new KeyValuePair<string, string>(i.Key, j))));
+
+            m_APILog.Add(res);
 
             return res;
         }
@@ -135,6 +149,8 @@ namespace ForgeAPI.Implementation.REST
             response.Headers
                 .ToList()
                 .ForEach(i => i.Value.ToList().ForEach(j => res.ResponseHeaders.Add(new KeyValuePair<string, string>(i.Key, j))));
+
+            m_APILog.Add(res);
 
             return res;
         }
@@ -182,6 +198,8 @@ namespace ForgeAPI.Implementation.REST
                 .ToList()
                 .ForEach(i => i.Value.ToList().ForEach(j => res.ResponseHeaders.Add(new KeyValuePair<string, string>(i.Key, j))));
 
+            m_APILog.Add(res);
+
             return res;
         }
 
@@ -219,6 +237,8 @@ namespace ForgeAPI.Implementation.REST
             response.Headers
                 .ToList()
                 .ForEach(i => i.Value.ToList().ForEach(j => res.ResponseHeaders.Add(new KeyValuePair<string, string>(i.Key, j))));
+
+            m_APILog.Add(res);
 
             return res;
         }
@@ -261,6 +281,8 @@ namespace ForgeAPI.Implementation.REST
             response.Headers
                 .ToList()
                 .ForEach(i => i.Value.ToList().ForEach(j => res.ResponseHeaders.Add(new KeyValuePair<string, string>(i.Key, j))));
+
+            m_APILog.Add(res);
 
             return res;
         }

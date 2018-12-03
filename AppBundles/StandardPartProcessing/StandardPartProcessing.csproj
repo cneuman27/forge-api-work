@@ -33,7 +33,7 @@
   <ItemGroup>
     <Reference Include="autodesk.inventor.interop, Version=20.0.0.0, Culture=neutral, PublicKeyToken=d84147f8b4276564, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
       <HintPath>..\..\_3rdParty\autodesk.inventor.interop.dll</HintPath>
     </Reference>
     <Reference Include="SpreadsheetGear2012">
@@ -68,6 +68,9 @@
     <None Include="Inputs\sample.json" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="MOM.SpatialSATLib">
+      <Version>2018.11.30.1006</Version>
+    </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>11.0.2</Version>
     </PackageReference>

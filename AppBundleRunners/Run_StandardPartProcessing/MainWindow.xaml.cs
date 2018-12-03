@@ -28,6 +28,8 @@ namespace Run_StandardPartProcessing
         private string m_InputFileLocation = "";
         private string m_OutputFolderLocation = "";
 
+        private StandardPartProcessing.CProcessor m_Processor = null;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -43,6 +45,7 @@ namespace Run_StandardPartProcessing
                 txtOutputFolder.DisableControl();
                 btnSelectOutputFolder.DisableControl();
 
+                btnAPILog.DisableControl();
                 btnRun.DisableControl();
             }
             else
@@ -52,6 +55,17 @@ namespace Run_StandardPartProcessing
 
                 txtOutputFolder.EnableControl();
                 btnSelectOutputFolder.EnableControl();
+
+                if (m_Processor != null &&
+                    m_Processor.APILog != null &&
+                    m_Processor.APILog.Count > 0)
+                {
+                    btnAPILog.EnableControl();
+                }
+                else
+                {
+                    btnAPILog.DisableControl();
+                }
 
                 if (System.IO.File.Exists(m_InputFileLocation) == false ||
                     string.IsNullOrWhiteSpace(m_OutputFolderLocation))
@@ -148,8 +162,7 @@ namespace Run_StandardPartProcessing
                 {
                     Inventor.InventorServer server;
                     Inventor.NameValueMap args;
-                    StandardPartProcessing.CProcessor processor;
-
+                    
                     server = connector.GetInventorServer();
 
                     args = server.TransientObjects.CreateNameValueMap();
@@ -157,11 +170,11 @@ namespace Run_StandardPartProcessing
                         "_1",
                         System.IO.Path.Combine(m_OutputFolderLocation, $"{inputs.PartNumber}.zip"));
 
-                    processor = new StandardPartProcessing.CProcessor(
+                    m_Processor = new StandardPartProcessing.CProcessor(
                         server,
                         new StandardPartProcessing.CProcessor.DelegateSetStatus(SetStatus));
 
-                    processor.RunWithArguments(null, args);
+                    m_Processor.RunWithArguments(null, args);
                 }
             }
             catch (ThreadAbortException)
@@ -256,6 +269,21 @@ namespace Run_StandardPartProcessing
             DoButtons();
 
             ThreadPool.QueueUserWorkItem(new WaitCallback(DoRun));
+        }
+        private void btnAPILog_Click(object sender, RoutedEventArgs e)
+        {
+            APILog.CFrmAPILog frm;
+
+            m_InProcess = true;
+            DoButtons();
+
+            frm = new APILog.CFrmAPILog();
+            frm.Start(
+                this,
+                m_Processor.APILog);
+
+            m_InProcess = false;
+            DoButtons();
         }
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {

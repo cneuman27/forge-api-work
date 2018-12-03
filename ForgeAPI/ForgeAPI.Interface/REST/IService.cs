@@ -4,6 +4,11 @@ namespace ForgeAPI.Interface.REST
 {
     public interface IService
     {
+        List<IResult> APILog
+        {
+            get;
+        }
+
         IResult Post(
             string uri,
             object data,

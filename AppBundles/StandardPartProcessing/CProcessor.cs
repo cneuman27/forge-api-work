@@ -1,4 +1,5 @@
-﻿using System;
+﻿#define DO_SAT
+using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -24,6 +25,8 @@ namespace StandardPartProcessing
 
         private string m_InputsPath = "";
         private string m_OutputsPath = "";
+
+        private ForgeAPI.Interface.REST.IService m_RESTService = null;
 
         public CProcessor(
             InventorServer server,
@@ -71,6 +74,19 @@ namespace StandardPartProcessing
 
                     throw e;
                 }
+            }
+        }
+
+        public List<ForgeAPI.Interface.REST.IResult> APILog
+        {
+            get
+            {
+                if (m_RESTService == null)
+                {
+                    return new List<ForgeAPI.Interface.REST.IResult>();
+                }
+
+                return m_RESTService.APILog;
             }
         }
 
@@ -243,48 +259,50 @@ namespace StandardPartProcessing
 
                 #endregion
 
-                //#region SAT
+#if (DO_SAT)
+                #region SAT
 
-                //{
-                //    SetStatus("Processing SAT");
+                {
+                    SetStatus("Processing SAT");
 
-                //    SpatialSATLib.CSAT sat;
-                //    string tmpPath;
+                    SpatialSATLib.CSAT sat;
+                    string tmpPath;
 
-                //    tmpPath = System.IO.Path.Combine(
-                //        m_OutputsPath,
-                //        $"{m_Inputs.PartNumber}.sat");
+                    tmpPath = System.IO.Path.Combine(
+                        m_OutputsPath,
+                        $"{m_Inputs.PartNumber}.sat");
 
-                //    partDoc.ExportSAT(tmpPath);
+                    partDoc.ExportSAT(tmpPath);
 
-                //    sat = new SpatialSATLib.CSAT(tmpPath);
-                //    if (sat.LoadOK() == false)
-                //    {
-                //        throw new Exception(sat.LoadErrorMessage());
-                //    }
+                    sat = new SpatialSATLib.CSAT(tmpPath);
+                    if (sat.LoadOK() == false)
+                    {
+                        throw new Exception(sat.LoadErrorMessage());
+                    }
 
-                //    sat.SetMaterialThickness(partDoc.GetSheetMetalThickness());
-                //    sat.FixOrientation();
-                //    sat.Save();
+                    sat.SetMaterialThickness(partDoc.GetSheetMetalThickness());
+                    sat.FixOrientation();
+                    sat.Save();
 
-                //    tmpPath = System.IO.Path.Combine(
-                //        m_OutputsPath,
-                //        $"{m_Inputs.PartNumber}_V7.sat");
+                    tmpPath = System.IO.Path.Combine(
+                        m_OutputsPath,
+                        $"{m_Inputs.PartNumber}_V7.sat");
 
-                //    sat.SaveAs(
-                //        tmpPath,
-                //        new Version("7.0.0.0"));
+                    sat.SaveAs(
+                        tmpPath,
+                        new Version("7.0.0.0"));
 
-                //    AddArtifact(
-                //        System.IO.Path.Combine(m_OutputsPath, $"{m_Inputs.PartNumber}.sat"),
-                //        Enums.E_ArtifactType.SAT);
+                    //AddArtifact(
+                    //    System.IO.Path.Combine(m_OutputsPath, $"{m_Inputs.PartNumber}.sat"),
+                    //    Enums.E_ArtifactType.SAT);
 
-                //    AddArtifact(
-                //        System.IO.Path.Combine(m_OutputsPath, $"{m_Inputs.PartNumber}_V7.sat"),
-                //        Enums.E_ArtifactType.SAT);
-                //}
+                    AddArtifact(
+                        System.IO.Path.Combine(m_OutputsPath, $"{m_Inputs.PartNumber}_V7.sat"),
+                        Enums.E_ArtifactType.SAT);
+                }
 
-                //#endregion
+                #endregion
+#endif
 
                 SetStatus("Processing DWFx");
 
@@ -368,6 +386,8 @@ namespace StandardPartProcessing
             using (var container = builder.Build())
             {
                 SetStatus("Getting Forge Authentication Token");
+
+                m_RESTService = container.Resolve<ForgeAPI.Interface.REST.IService>();
 
                 #region Authenticate
 
